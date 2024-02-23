@@ -10,9 +10,13 @@
   </div>
 </nav>
 
+
+
 <h1><%= @list.name %> 🎬 details</h1>
 <div class="container">
 <div class="row">
+
+
 <% @list.bookmarks.each do |bookmark| %>
   <%= link_to root_path, class: "card-link" do %>
   <div class="card col-4" >

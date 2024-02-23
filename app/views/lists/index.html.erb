@@ -12,5 +12,7 @@
 
 <h1>Lists' 🎥</h1>
 <% @lists.each do |listitem| %>
-<li><%= link_to listitem.name, list_path(listitem) %></li>
+<%= link_to listitem.name, list_path(listitem) %>
+<%= cl_image_tag listitem.photo.key, height: 300, width: 400, crop: :fill %>
+
 <% end %>

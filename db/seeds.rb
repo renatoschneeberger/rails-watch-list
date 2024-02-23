@@ -1,3 +1,5 @@
+require "open-uri"
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -27,13 +29,14 @@ movie1 = Movie.create(title: "Titanic2", overview: "101-year-old Rose DeWitt Buk
 Movie.create(title: "Ocean's Eight2", overview: "Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century.", poster_url: "https://image.tmdb.org/t/p/original/MvYpKlpFukTivnlBhizGbkAe3v.jpg", rating: 7.0)
 
 puts "destroy List db"
-puts movie1
+
+file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
 
 
+list1 = List.new(name: "All time favourites")
+list1.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
+list1.save
 
-list1 = List.create(name: "All time favourites")
-List.create(name: "Shammi's top 10")
-List.create(name: "Matheus's picks")
 
 puts "seed new List db"
 puts list1
@@ -41,7 +44,6 @@ puts list1
 
 bookmark1 = Bookmark.create(movie: movie1, list: list1, comment: "That worked")
 bookmark1 = Bookmark.create(movie: Movie.last, list: List.last, comment: "What a movie!!! Love it.")
-bookmark1 = Bookmark.create(movie: Movie.last, list: list1, comment: "What a movie!!! Love it.")
 
 
 print bookmark1
