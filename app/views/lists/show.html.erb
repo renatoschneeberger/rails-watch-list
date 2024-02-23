@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse d-flex justify-content-end">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" ><%= link_to "Add a movie", new_list_bookmark_path(@list) %></a>
+      <a class="nav-item nav-link" ><%= link_to "Back to lists", lists_path %></a>
+    </div>
+  </div>
+</nav>
+
+<h1><%= @list.name %> 🎬 details</h1>
+<div class="container">
+<div class="row">
+<% @list.bookmarks.each do |bookmark| %>
+  <%= link_to lists_path, class: "card-link" do %>
+  <div class="card col-4" >
+    <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title, width: "100%" %>
+    <div class="card-body">
+      <h5 class="card-title"><%= bookmark.movie.title %></h5>
+      <p class="card-text"> <%= bookmark.comment %></p>
+        <%= link_to "🗑️", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+    </div>
+  </div>
+<% end %>
+<% end %>
+</div>
+</div>
